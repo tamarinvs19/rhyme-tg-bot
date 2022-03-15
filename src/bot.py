@@ -8,6 +8,8 @@ def help_command(update, context):
     context.bot.send_message(
         chat_id=update.effective_chat.id,
         text="""
+            Pushkin rhyme bot.
+            
             Commands:
             /help  Show help
             /start Say hello

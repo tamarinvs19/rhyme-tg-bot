@@ -25,7 +25,11 @@ def find_rhyme(row):
     soup = BeautifulSoup(text_page, 'lxml')
     csv_link = soup.find('a', text='CSV')
 
-    rhyme_table = requests.request('GET', RUCORPORA_PREFIX + csv_link['href'])
+    try:
+        rhyme_table = requests.request('GET', RUCORPORA_PREFIX + csv_link['href'])
+    except TypeError as _:
+        return 'No relevant lines'
+
     decode_content = rhyme_table.content.decode('utf-8')
     reader = csv.DictReader(
         decode_content.splitlines(),
