@@ -42,9 +42,11 @@ def main_bot():
         MessageHandler(Filters.text & ~Filters.command, rhyme_command)
     )
 
-    updater.start_webhook(listen="0.0.0.0",
-                          port=cfg.PORT,
-                          url_path=cfg.TOKEN)
+    updater.start_webhook(
+        listen="0.0.0.0",
+        port=cfg.PORT,
+        url_path=cfg.TOKEN,
+    )
     updater.bot.setWebhook(f'https://{cfg.APPNAME}.herokuapp.com/' + cfg.TOKEN)
     updater.idle()
 
