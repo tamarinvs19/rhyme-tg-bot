@@ -46,8 +46,8 @@ def main_bot():
         listen="0.0.0.0",
         port=cfg.PORT,
         url_path=cfg.TOKEN,
+        webhook_url=f'https://{cfg.APPNAME}.herokuapp.com/' + cfg.TOKEN,
     )
-    updater.bot.setWebhook(f'https://{cfg.APPNAME}.herokuapp.com/' + cfg.TOKEN)
     updater.idle()
 
 
