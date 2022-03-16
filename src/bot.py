@@ -1,3 +1,4 @@
+from telegram import KeyboardButton, ReplyKeyboardMarkup
 from telegram.ext import Updater, CommandHandler, Filters, MessageHandler
 
 import config as cfg
@@ -8,12 +9,12 @@ def help_command(update, context):
     context.bot.send_message(
         chat_id=update.effective_chat.id,
         text="""
-            Pushkin rhyme bot.
+            Пушкин каждый день.
             
-            Commands:
-            /help  Show help
-            /start Say hello
-            <text> Find rhyme
+            Команды:
+            /help  Показать справку
+            /start Запустить бота
+            <text> Найти строчку в рифму
         """,
     )
 
@@ -22,15 +23,20 @@ def start_bot(update, context):
     user = update.effective_user
     context.bot.send_message(
         chat_id=update.effective_chat.id,
-        text=f'Hi {user.full_name}!',
+        text=f'Привет, {user.full_name}!',
     )
 
 
 def rhyme_command(update, context):
     answer = rhyme.find_rhyme(update.message.text)
+
+    try_again_button = KeyboardButton(update.message.text)
+    greet_kb = ReplyKeyboardMarkup([[try_again_button]], True)
+
     context.bot.send_message(
         chat_id=update.effective_chat.id,
         text=answer,
+        reply_markup=greet_kb,
     )
 
 
